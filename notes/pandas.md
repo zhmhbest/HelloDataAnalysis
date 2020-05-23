@@ -3,8 +3,16 @@
 
 # [Pandas](./index.html)
 
+## Series
 
-```py
+## DataFrame
+
+## Document
+
+## DatetimeIndex
+
+
+<!-- ```py
     # 生成时间序列
     # start end : 时间起止
     # periods : 生成个数
@@ -27,4 +35,4 @@
     print(len(df))
     print(df[0])
     print(df)
-```
+``` -->
