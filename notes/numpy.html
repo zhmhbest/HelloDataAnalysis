@@ -282,7 +282,14 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#astype">astype</a></li>
 <li><a href="#stack">stack</a></li>
 <li><a href="#section">section</a></li>
-<li><a href="#statistic">statistic</a></li>
+<li><a href="#loadtxt">loadtxt</a></li>
+<li><a href="#analysis">analysis</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">&#x6570;&#x636E;&#x9884;&#x5904;&#x7406;</a></li>
+<li><a href="#%E8%BD%AC%E7%BD%AE">&#x8F6C;&#x7F6E;</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1">&#x6570;&#x636E;&#x7EDF;&#x8BA1;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -506,6 +513,7 @@ nd_random_uniform1 <span class="token operator">=</span> np<span class="token pu
 <span class="token comment"># &#x1F446; &#x5B9E;&#x9645;&#x8FD0;&#x884C;&#x7ED3;&#x679C;&#x4E0D;&#x4E00;&#x5B9A;&#x4E0E;&#x6B64;&#x5904;&#x4E00;&#x81F4;</span>
 </pre><h2 class="mume-header" id="reshape">reshape</h2>
 
+<p><strong>&#x5F62;&#x72B6;&#x8C03;&#x6574;</strong></p>
 <pre data-role="codeBlock" data-info="py" class="language-python">nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">24</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -560,6 +568,7 @@ nd_random_uniform1 <span class="token operator">=</span> np<span class="token pu
 &apos;&apos;&apos;</span>
 </pre><h2 class="mume-header" id="astype">astype</h2>
 
+<p><strong>&#x7C7B;&#x578B;&#x8F6C;&#x6362;</strong></p>
 <pre data-role="codeBlock" data-info="py" class="language-python">nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
 <span class="token comment"># int32</span>
@@ -573,6 +582,7 @@ nd_arr_i8 <span class="token operator">=</span> nd_arr<span class="token punctua
 <span class="token comment"># int8</span>
 </pre><h2 class="mume-header" id="stack">stack</h2>
 
+<p><strong>&#x6570;&#x636E;&#x62FC;&#x63A5;</strong></p>
 <pre data-role="codeBlock" data-info="py" class="language-python">arr1 <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
@@ -695,9 +705,260 @@ arr2 <span class="token operator">=</span> np<span class="token punctuation">.</
  ...
  [50 52 54]]
 &apos;&apos;&apos;</span>
-</pre><h2 class="mume-header" id="statistic">statistic</h2>
+</pre><h2 class="mume-header" id="loadtxt">loadtxt</h2>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">sequence_generator</span><span class="token punctuation">(</span>row_num<span class="token punctuation">,</span> delimiter<span class="token operator">=</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> _i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>row_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token number">0</span> <span class="token operator">==</span> _i <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            <span class="token keyword">yield</span> <span class="token string">&apos;#&apos;</span> <span class="token operator">+</span> delimiter<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token keyword">for</span> it <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>_i<span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>_i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">yield</span> delimiter<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token keyword">for</span> it <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>_i<span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>_i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># end def</span>
+
+<span class="token keyword">for</span> it <span class="token keyword">in</span> sequence_generator<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+#0,1,2,3,4,5,6,7,8,9
+10,11,12,13,14,15,16,17,18,19
+20,21,22,23,24,25,26,27,28,29
+#30,31,32,33,34,35,36,37,38,39
+40,41,42,43,44,45,46,47,48,49
+&apos;&apos;&apos;</span>
+</pre><pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    np.loadtxt(
+        fname,              # {str} &#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x662F;text, gz, bz2
+        dtype=float,
+        comments=&apos;#&apos;,       # {str} &#x6CE8;&#x91CA;&#x7B26;
+        delimiter=None,     # {str} &#x6570;&#x636E;&#x5206;&#x5272;&#x7B26;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; space
+        converters=None,    # {dict} &#x7528;&#x4E8E;&#x8C03;&#x6574;&#x5217;&#x6570;&#x636E;
+        skiprows=0,         # {int} &#x8DF3;&#x8FC7;&#x5F00;&#x5934;&#x51E0;&#x884C;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 0
+        usecols=None,       # {sequence} &#x6307;&#x5B9A;&#x8BFB;&#x53D6;&#x54EA;&#x51E0;&#x884C;&#xFF0C;&#x9ED8;&#x8BA4;&#x8BFB;&#x53D6;&#x5168;&#x90E8;
+        unpack=False,       # {bool} &#x662F;&#x5426;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x8F6C;&#x7F6E;
+        ndmin=0,            # {int} 
+        encoding=&apos;bytes&apos;,   # {str} &#x6587;&#x4EF6;&#x7F16;&#x7801;
+        max_rows=None       # {int} &#x6700;&#x591A;&#x8BFB;&#x53D6;&#x884C;&#x6570;&#xFF08;&#x4E0D;&#x7B97;&#x8DF3;&#x8FC7;&#x7684;&#x90E8;&#x5206;&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x65E0;&#x9650;&#x5236;
+)
+&quot;&quot;&quot;</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>loadtxt<span class="token punctuation">(</span>sequence_generator<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span><span class="token builtin">int</span><span class="token punctuation">,</span> delimiter<span class="token operator">=</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[10 11 12 13 14 15 16 17 18 19]
+ [20 21 22 23 24 25 26 27 28 29]
+ [40 41 42 43 44 45 46 47 48 49]]
+&apos;&apos;&apos;</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>loadtxt<span class="token punctuation">(</span>sequence_generator<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> skiprows<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span><span class="token builtin">int</span><span class="token punctuation">,</span> delimiter<span class="token operator">=</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[20 21 22 23 24 25 26 27 28 29]
+ [40 41 42 43 44 45 46 47 48 49]]
+&apos;&apos;&apos;</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>loadtxt<span class="token punctuation">(</span>sequence_generator<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> usecols<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span><span class="token builtin">int</span><span class="token punctuation">,</span> delimiter<span class="token operator">=</span><span class="token string">&apos;,&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[12 13]
+ [22 23]
+ [42 43]]
+&apos;&apos;&apos;</span>
+</pre><h2 class="mume-header" id="analysis">analysis</h2>
+
+<blockquote>
+<ul>
+<li><code>axis=0</code>&#xFF1A;&#x6309;&#x5217;&#x7EDF;&#x8BA1;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#x884C;</li>
+<li><code>axis=1</code>&#xFF1A;&#x6309;&#x884C;&#x7EDF;&#x8BA1;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#x5217;</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">&#x6570;&#x636E;&#x9884;&#x5904;&#x7406;</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">generate_test_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>nd_arr <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> nd_arr<span class="token punctuation">)</span>
+    nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>nd_arr <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> nd_arr<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&apos;\n\n&apos;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> nd_arr
+    <span class="token comment"># &#x53D6;&#x503C;&#x8303;&#x56F4;&#xFF1A;nan inf -4 -3 -2 -1 0 1 2 3 4</span>
 
 
+<span class="token comment"># &#x56FA;&#x5B9A;&#x6D4B;&#x8BD5;&#x6570;&#x636E;</span>
+<span class="token comment"># nd_arr = generate_test_data()</span>
+nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x7EDF;&#x8BA1;np.nan&#x6570;&#x91CF;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;nan in col&apos;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>np<span class="token punctuation">.</span>isnan<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;nan in row&apos;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>np<span class="token punctuation">.</span>isnan<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+nan in col [0 0 0 1 2 0 0 1 1 1]
+nan in row [1 1 0 2 2]
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x7EDF;&#x8BA1;np.inf&#x6570;&#x91CF;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;inf in col&apos;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>np<span class="token punctuation">.</span>isinf<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&apos;inf in row&apos;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>np<span class="token punctuation">.</span>isinf<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+inf in col [1 0 1 1 0 1 1 0 0 1]
+inf in row [3 1 0 0 2]
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x4EE5;0&#x586B;&#x5145;nan&#xFF0C;&#x4EE5;99&#x586B;&#x5145;inf</span>
+<span class="token comment"># nd_arr = np.where(np.isnan(nd_arr), 0, nd_arr)</span>
+nd_arr<span class="token punctuation">[</span>np<span class="token punctuation">.</span>isnan<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token comment"># nd_arr = np.where(np.isinf(nd_arr), 99, nd_arr)</span>
+nd_arr<span class="token punctuation">[</span>np<span class="token punctuation">.</span>isinf<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">99</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[-2.  2.  1. 99.  0. -3. 99.  1. -3. 99.]
+ [ 4. -4.  3.  0.  4. 99. -3. -4. -3.  0.]
+ [-2.  3.  1.  1.  3.  0.  4.  0. -3. -3.]
+ [-2. -3.  3. -4.  0. -1.  4. -2.  0.  1.]
+ [99.  2. 99.  0. -2.  0. -3.  0.  2. -4.]]
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6570;&#x636E;&#x88C1;&#x526A;.&#x8D85;&#x51FA;&#x9650;&#x5236;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x88AB;&#x66FF;&#x6362;&#x4E3A;&#x8FB9;&#x754C;&#x503C;</span>
+nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>clip<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[-2.  2.  1.  2.  0. -2.  2.  1. -2.  2.]
+ [ 2. -2.  2.  0.  2.  2. -2. -2. -2.  0.]
+ [-2.  2.  1.  1.  2.  0.  2.  0. -2. -2.]
+ [-2. -2.  2. -2.  0. -1.  2. -2.  0.  1.]
+ [ 2.  2.  2.  0. -2.  0. -2.  0.  2. -2.]]
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x7EDF;&#x8BA1;&#x5927;&#x4E8E;0&#x7684;&#x6570;&#x91CF;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>nd_arr <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>count_nonzero<span class="token punctuation">(</span>nd_arr <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[2 3 5 2 2 1 3 1 1 2]
+[6 4 5 3 4]
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="%E8%BD%AC%E7%BD%AE">&#x8F6C;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python">nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">.</span>T<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>transpose<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>swapaxes<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>swapaxes<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[[1 3]
+ [2 4]]
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1">&#x6570;&#x636E;&#x7EDF;&#x8BA1;</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python">nd_arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">37</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">82</span><span class="token punctuation">,</span> <span class="token number">67</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">79</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">37</span><span class="token punctuation">,</span> <span class="token number">83</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">95</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">93</span><span class="token punctuation">,</span> <span class="token number">84</span><span class="token punctuation">,</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token number">51</span><span class="token punctuation">,</span> <span class="token number">82</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token number">46</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">84</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&apos;\n\n&apos;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x6700;&#x5927;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[93 84 62 51 83 99 95 56 60 84]
+[82 95 99]
+99
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6700;&#x5C0F;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">min</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">min</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">min</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[12 22 10 24 82 42 36 36 16 62]
+[22 10 36]
+10
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6C42;&#x548C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[175 170 109 112 247 208 187 138  98 225]
+[557 415 697]
+1669
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x4E2D;&#x4F4D;&#x6570;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>median<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>median<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>median<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[70. 64. 37. 37. 82. 67. 56. 46. 22. 79.]
+[60.  36.5 72. ]
+58.0
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x5E73;&#x5747;&#x6570;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[58 56 36 37 82 69 62 46 32 75]
+[55 41 69]
+55
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x52A0;&#x6743;&#x5E73;&#x5747;&#x6570;</span>
+w <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># &#x1F448;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5BF9;&#x5E94;&#x7684;&#x6743;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>average<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> weights<span class="token operator">=</span>w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>average<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> weights<span class="token operator">=</span>w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>average<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> weights<span class="token operator">=</span>w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[63.21052632 41.         39.33333333 42.07142857 82.16666667 77.63636364
+ 70.92307692 49.63636364 41.46666667 79.55      ]
+[57.73469388 39.54761905 74.46296296]
+58.69655172413793
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6781;&#x5DEE;&#xFF08;&#x6700;&#x5927;-&#x6700;&#x5C0F;&#xFF09;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>ptp<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>ptp<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>ptp<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[81 62 52 27  1 57 59 20 44 22]
+[60 85 63]
+89
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x65B9;&#x5DEE;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>var<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>var<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>var<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[1.16155556e+03 6.67555556e+02 4.50888889e+02 1.21555556e+02
+ 2.22222222e-01 5.44222222e+02 6.00222222e+02 6.66666667e+01
+ 3.79555556e+02 8.86666667e+01]
+[412.61 794.85 416.21]
+673.7655555555555
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6807;&#x51C6;&#x5DEE;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>nd_arr<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>nd_arr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+[34.08160142 25.8370965  21.23414441 11.02522361  0.47140452 23.32857094
+ 24.4994331   8.16496581 19.48218559  9.41629793]
+[20.31280384 28.19308426 20.40122545]
+25.956994347488607
+&apos;&apos;&apos;</span>
+</pre>
       </div>
       
       
