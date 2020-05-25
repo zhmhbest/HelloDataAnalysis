@@ -281,7 +281,9 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#__init__-1">__init__</a></li>
 <li><a href="#attributes-1">Attributes</a></li>
 <li><a href="#select-1">Select</a></li>
-<li><a href="#update">Update</a></li>
+<li><a href="#update-shape">Update Shape</a></li>
+<li><a href="#calculate">Calculate</a></li>
+<li><a href="#join">Join</a></li>
 </ul>
 </li>
 <li><a href="#io">IO</a>
@@ -293,10 +295,12 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 </ul>
+<blockquote>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html">Pandas API</a></p>
+</blockquote>
 <pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 <span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
-</pre><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html"><code>Pandas API</code></a></p>
-<h2 class="mume-header" id="types">Types</h2>
+</pre><h2 class="mume-header" id="types">Types</h2>
 
 <table>
 <thead>
@@ -572,7 +576,19 @@ Name: a, dtype: int32
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
 0
 &apos;&apos;&apos;</span>
-</pre><h3 class="mume-header" id="update">Update</h3>
+</pre><p><strong>&#x7B5B;&#x9009;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x7B5B;&#x9009;&#x6570;&#x636E;&#xFF0C;&#x672A;&#x9009;&#x5230;&#x7684;&#x5C31;&#x662F;NaN</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">[</span><span class="token number">0</span> <span class="token operator">==</span> df_test <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> df_test <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">,</span> other<span class="token operator">=</span>np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+    A   B   C   D   E   F   G   H   I   J
+a   0 NaN   2 NaN   4 NaN   6 NaN   8 NaN
+b  10 NaN  12 NaN  14 NaN  16 NaN  18 NaN
+c  20 NaN  22 NaN  24 NaN  26 NaN  28 NaN
+d  30 NaN  32 NaN  34 NaN  36 NaN  38 NaN
+e  40 NaN  42 NaN  44 NaN  46 NaN  48 NaN
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="update-shape">Update Shape</h3>
 
 <p><strong>&#x5220;&#x9664;</strong></p>
 <pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x521B;&#x5EFA;&#x89C6;&#x56FE;</span>
@@ -653,7 +669,45 @@ c  20  21  22  23  24  25  ...  28  29        92       NaN       1.0       0.0
 d  30  31  32  33  34  35  ...  38  39        93       NaN       NaN       1.0
 e  40  41  42  43  44  45  ...  48  49        94       NaN       NaN       NaN
 &apos;&apos;&apos;</span>
-</pre><h2 class="mume-header" id="io">IO</h2>
+</pre><h3 class="mume-header" id="calculate">Calculate</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">calc_row</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>row<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">calc_col</span><span class="token punctuation">(</span>col<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>col<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+df_test<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>calc_row<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+a     45
+b    145
+c    245
+d    345
+e    445
+dtype: int64
+&apos;&apos;&apos;</span>
+
+df_test<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>calc_col<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+A    100
+B    105
+C    110
+D    115
+E    120
+F    125
+G    130
+H    135
+I    140
+J    145
+dtype: int64
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="join">Join</h3>
+
+<h2 class="mume-header" id="io">IO</h2>
 
 <blockquote>
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">API IO</a></p>

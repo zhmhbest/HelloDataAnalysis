@@ -5,12 +5,12 @@
 
 [TOC]
 
+>[Pandas API](https://pandas.pydata.org/pandas-docs/stable/reference/index.html)
+
 ```py
 import numpy as np
 import pandas as pd
 ```
-
-[`Pandas API`](https://pandas.pydata.org/pandas-docs/stable/reference/index.html)
 
 ## Types
 
@@ -296,7 +296,23 @@ print(df_test.iat[0, 0])
 '''
 ```
 
-### Update
+**筛选**
+
+```py
+# 筛选数据，未选到的就是NaN
+print(df_test[0 == df_test % 2])
+print(df_test.where(0 == df_test % 2, other=np.nan, inplace=False))
+'''
+    A   B   C   D   E   F   G   H   I   J
+a   0 NaN   2 NaN   4 NaN   6 NaN   8 NaN
+b  10 NaN  12 NaN  14 NaN  16 NaN  18 NaN
+c  20 NaN  22 NaN  24 NaN  26 NaN  28 NaN
+d  30 NaN  32 NaN  34 NaN  36 NaN  38 NaN
+e  40 NaN  42 NaN  44 NaN  46 NaN  48 NaN
+'''
+```
+
+### Update Shape
 
 **删除**
 
@@ -388,6 +404,49 @@ d  30  31  32  33  34  35  ...  38  39        93       NaN       NaN       1.0
 e  40  41  42  43  44  45  ...  48  49        94       NaN       NaN       NaN
 '''
 ```
+
+### Calculate
+
+```py
+def calc_row(row):
+    print(row.sum())
+
+
+def calc_col(col):
+    print(col.sum())
+
+
+df_test.apply(calc_row, axis=1)
+print(df_test.sum(axis=1))
+'''
+a     45
+b    145
+c    245
+d    345
+e    445
+dtype: int64
+'''
+
+df_test.apply(calc_col, axis=0)
+print(df_test.sum(axis=0))
+'''
+A    100
+B    105
+C    110
+D    115
+E    120
+F    125
+G    130
+H    135
+I    140
+J    145
+dtype: int64
+'''
+```
+
+### Join
+
+
 
 ## IO
 
