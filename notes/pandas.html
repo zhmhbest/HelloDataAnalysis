@@ -265,20 +265,25 @@ pre[data-line] .line-highlight[data-end]:after {
 <script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 <h1 class="mume-header" id="pandasindexhtml"><a href="./index.html">Pandas</a></h1>
 
-<blockquote>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html">Pandas API</a></p>
-</blockquote>
 <ul>
 <li><a href="#pandasindexhtml">Pandas</a>
 <ul>
 <li><a href="#types">Types</a></li>
 <li><a href="#series">Series</a>
 <ul>
-<li><a href="#%E5%88%9B%E5%BB%BA">&#x521B;&#x5EFA;</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</a></li>
+<li><a href="#__init__">__init__</a></li>
+<li><a href="#attributes">Attributes</a></li>
+<li><a href="#select">Select</a></li>
 </ul>
 </li>
-<li><a href="#dataframe">DataFrame</a></li>
+<li><a href="#dataframe">DataFrame</a>
+<ul>
+<li><a href="#__init__-1">__init__</a></li>
+<li><a href="#attributes-1">Attributes</a></li>
+<li><a href="#select-1">Select</a></li>
+<li><a href="#update">Update</a></li>
+</ul>
+</li>
 <li><a href="#io">IO</a>
 <ul>
 <li><a href="#csv">CSV</a></li>
@@ -288,8 +293,10 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
-</pre><h2 class="mume-header" id="types">Types</h2>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+</pre><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html"><code>Pandas API</code></a></p>
+<h2 class="mume-header" id="types">Types</h2>
 
 <table>
 <thead>
@@ -332,80 +339,242 @@ pre[data-line] .line-highlight[data-end]:after {
 <blockquote>
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/series.html">API Series</a></p>
 </blockquote>
-<h3 class="mume-header" id="%E5%88%9B%E5%BB%BA">&#x521B;&#x5EFA;</h3>
+<p><strong>&#x6D4B;&#x8BD5;&#x6570;&#x636E;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python">ser1 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">}</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">&apos;int32&apos;</span><span class="token punctuation">)</span>
+</pre><h3 class="mume-header" id="__init__">__init__</h3>
 
 <pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
     &#x5E26;&#x6709;&#x8F74;&#x6807;&#x7B7E;&#x7684;&#x4E00;&#x7EF4;ndarray
     Series(data=None, index=None, dtype=None, name=None, copy=False)
-        data: {list|iter|dict|scalar} &#x6570;&#x636E;
+        data : {list|Iterable|dict|scalar} &#x6570;&#x636E;
         index: {list} &#x7D22;&#x5F15;
+        name : {str} Series&#x7684;&#x540D;&#x79F0;
 &quot;&quot;&quot;</span>
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># list</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span>data<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">&apos;ser_list&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
 0    a
 1    b
 2    c
-dtype: object
+Name: ser_list, dtype: object
 &apos;&apos;&apos;</span>
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">&apos;int64&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># dict</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span>data<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token string">&apos;int64&apos;</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">&apos;ser_dict&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
 a    1
 b    2
 c    3
-dtype: int64
+Name: ser_dict, dtype: int64
 &apos;&apos;&apos;</span>
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># Iterable</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span>data<span class="token operator">=</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
 0    0
 1    1
 2    2
 dtype: int64
 &apos;&apos;&apos;</span>
-</pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
+</pre><h3 class="mume-header" id="attributes">Attributes</h3>
 
-<pre data-role="codeBlock" data-info="py" class="language-python">ser1 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-ser2 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">:</span> <span class="token number">21</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token string">&apos;D&apos;</span><span class="token punctuation">:</span> <span class="token number">23</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token comment"># &#x6309;&#x7D22;&#x5F15;&#x540D;&#x79F0;&#x53D6;&#x503C;</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">[</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment"># 11</span>
-
-<span class="token comment"># &#x6309;&#x7D22;&#x5F15;&#x987A;&#x5E8F;&#x53D6;&#x503C;</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>values<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment"># 11</span>
-
-<span class="token comment"># &#x53D6;&#x7D22;&#x5F15;</span>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x7D22;&#x5F15;</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>index<span class="token punctuation">)</span>
 <span class="token comment"># Index([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;], dtype=&apos;object&apos;)</span>
 
-<span class="token comment"># &#x4FEE;&#x6539;&#x7D22;&#x5F15;</span>
-ser1<span class="token punctuation">.</span>index <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&apos;A&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;b&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;c&apos;</span><span class="token punctuation">]</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">)</span>
+<span class="token comment"># &#x7C7B;&#x578B;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+<span class="token comment"># int32</span>
+
+<span class="token comment"># &#x5143;&#x7D20;&#x4E2A;&#x6570;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token comment"># 3</span>
+</pre><h3 class="mume-header" id="select">Select</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x5F00;&#x5934;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
-A    10
+a    10
 b    11
-c    12
-dtype: int64
+dtype: int32
 &apos;&apos;&apos;</span>
 
-<span class="token comment"># &#x81EA;&#x52A8;&#x5BF9;&#x9F50;</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token operator">+</span>ser2<span class="token punctuation">)</span>
+<span class="token comment"># &#x7ED3;&#x5C3E;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>tail<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
-A     NaN
-D     NaN
-b    32.0
-c    34.0
-dtype: float64
+b    11
+c    12
+dtype: int32
 &apos;&apos;&apos;</span>
+</pre><pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x6309;&#x7D22;&#x5F15;&#x540D;&#x79F0;&#x53D6;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">[</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>loc<span class="token punctuation">[</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>at<span class="token punctuation">[</span><span class="token string">&apos;b&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># 11</span>
+
+<span class="token comment"># &#x6309;&#x7D22;&#x5F15;&#x987A;&#x5E8F;&#x53D6;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>iat<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># 11</span>
 </pre><h2 class="mume-header" id="dataframe">DataFrame</h2>
 
 <blockquote>
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/frame.html">API DataFrame</a></p>
 </blockquote>
-<h2 class="mume-header" id="io">IO</h2>
+<p><strong>&#x6D4B;&#x8BD5;&#x6570;&#x636E;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">generate_test_df</span><span class="token punctuation">(</span>row_num<span class="token punctuation">,</span> col_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>
+        data<span class="token operator">=</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>row_num<span class="token operator">*</span>col_num<span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>row_num<span class="token punctuation">,</span> col_num<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token number">97</span><span class="token operator">+</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>row_num<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token number">65</span><span class="token operator">+</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>col_num<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        dtype<span class="token operator">=</span><span class="token string">&apos;int32&apos;</span>
+    <span class="token punctuation">)</span>
+
+
+df_test <span class="token operator">=</span> generate_test_df<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+    A   B   C   D   E   F   G   H   I   J
+a   0   1   2   3   4   5   6   7   8   9
+b  10  11  12  13  14  15  16  17  18  19
+c  20  21  22  23  24  25  26  27  28  29
+d  30  31  32  33  34  35  36  37  38  39
+e  40  41  42  43  44  45  46  47  48  49
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="__init__-1">__init__</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    &#x4E8C;&#x7EF4;&#x3001;&#x5927;&#x5C0F;&#x53EF;&#x53D8;&#x3001;&#x6F5C;&#x5728;&#x5F02;&#x6784;&#x7684;&#x8868;&#x683C;&#x6570;&#x636E;
+    pd.DataFrame(data=None, index=None, columns=None, dtype=None, copy=False)
+        data    : {dict|list of list|list of Series|DataFrame}
+        index   : {list} &#x6307;&#x5B9A;&#x7D22;&#x5F15;
+        columns : {list} &#x6307;&#x5B9A;&#x5217;&#x540D;
+        dtype   : {None|str|np.dtypes} &#x6307;&#x5B9A;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;None&#x8868;&#x793A;&#x81EA;&#x52A8;&#x63A8;&#x65AD;
+&quot;&quot;&quot;</span>
+
+<span class="token comment"># list of list: &#x9700;&#x8981;&#x6307;&#x5B9A;&#x7D22;&#x5F15;&#x548C;&#x5217;&#x540D;</span>
+df_lol <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;row_1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;row_2&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;col_1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;col_2&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_lol<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+       col_1  col_2
+row_1     11     21
+row_2     12     22
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># dict: &#x81EA;&#x5E26;&#x5217;&#x540D;&#xFF0C;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x7D22;&#x5F15;</span>
+df_dict <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">&apos;col_1&apos;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;col_2&apos;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">21</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;row_1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;row_2&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_dict<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+       col_1  col_2
+row_1     11     21
+row_2     12     22
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># Series: Series.name=&#x7D22;&#x5F15;&#xFF0C;Series.index=&#x5217;&#x540D;</span>
+df_los <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">&apos;row_1&apos;</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;col_1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;col_2&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">21</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">&apos;row_2&apos;</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;col_1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;col_2&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_los<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+       col_1  col_2
+row_1     11     21
+row_2     12     22
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="attributes-1">Attributes</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x5143;&#x7D20;&#x603B;&#x6570;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7EF4;&#x5EA6;&#x5F62;&#x72B6;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x7EF4;&#x5EA6;&#x6DF1;&#x5EA6;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>ndim<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x884C;&#x5217;&#x7D22;&#x5F15;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>axes<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x884C;&#x7D22;&#x5F15;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>index<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x5217;&#x7D22;&#x5F15;&#xFF1A;&quot;</span><span class="token punctuation">,</span> df_test<span class="token punctuation">.</span>columns<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6BCF;&#x5217;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#xFF1A;&quot;</span><span class="token punctuation">,</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> df_test<span class="token punctuation">.</span>dtypes<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x6BCF;&#x5217;&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF1A;&quot;</span><span class="token punctuation">,</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> df_test<span class="token punctuation">.</span>memory_usage<span class="token punctuation">(</span>index<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;index&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF1A;&quot;</span><span class="token punctuation">,</span>  df_test<span class="token punctuation">.</span>memory_usage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;DF&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF1A;&quot;</span><span class="token punctuation">,</span>  df_test<span class="token punctuation">.</span>empty<span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+&#x5143;&#x7D20;&#x603B;&#x6570;&#xFF1A; 50
+&#x7EF4;&#x5EA6;&#x5F62;&#x72B6;&#xFF1A; (5, 10)
+&#x7EF4;&#x5EA6;&#x6DF1;&#x5EA6;&#xFF1A; 2
+&#x884C;&#x5217;&#x7D22;&#x5F15;&#xFF1A; [Index([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;], dtype=&apos;object&apos;), Index([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;, &apos;H&apos;, &apos;I&apos;, &apos;J&apos;], dtype=&apos;object&apos;)]
+&#x884C;&#x7D22;&#x5F15;&#xFF1A; Index([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;], dtype=&apos;object&apos;)
+&#x5217;&#x7D22;&#x5F15;&#xFF1A; Index([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;, &apos;H&apos;, &apos;I&apos;, &apos;J&apos;], dtype=&apos;object&apos;)
+&#x6BCF;&#x5217;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#xFF1A; int32,int32,int32,int32,int32,int32,int32,int32,int32,int32
+&#x6BCF;&#x5217;&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF1A; 20,20,20,20,20,20,20,20,20,20
+index&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF1A; 40
+DF&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF1A; False
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="select-1">Select</h3>
+
+<p><strong>&#x5F00;&#x5934;&#x3001;&#x7ED3;&#x5C3E;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x5F00;&#x5934;n&#x884C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+   A  B  C  D  E  F  G  H  I  J
+a  0  1  2  3  4  5  6  7  8  9
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x7ED3;&#x5C3E;n&#x884C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>tail<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+    A   B   C   D   E   F   G   H   I   J
+e  40  41  42  43  44  45  46  47  48  49
+&apos;&apos;&apos;</span>
+</pre><p><strong>&#x4E00;&#x5217;&#x3001;&#x4E00;&#x884C;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x6309;col name&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x5217;Series</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">[</span><span class="token string">&apos;A&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&apos;A&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+a     0
+...
+e    40
+Name: A, dtype: int32
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6309;row name&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x884C;Series</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>loc<span class="token punctuation">[</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+A    0
+...
+J    9
+Name: a, dtype: int32
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6309;row index&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x884C;Series</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+A    0
+...
+J    9
+Name: a, dtype: int32
+&apos;&apos;&apos;</span>
+</pre><p><strong>&#x5355;&#x5143;&#x683C;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x6309;(row name, col name)&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5355;&#x5143;&#x683C;numpy.type</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>at<span class="token punctuation">[</span><span class="token string">&apos;a&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;A&apos;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+0
+&apos;&apos;&apos;</span>
+
+<span class="token comment"># &#x6309;(row index, col index)&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5355;&#x5143;&#x683C;numpy.type</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>iat<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+0
+&apos;&apos;&apos;</span>
+</pre><h3 class="mume-header" id="update">Update</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"></pre><h2 class="mume-header" id="io">IO</h2>
 
 <blockquote>
 <p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/io.html">API IO</a></p>
