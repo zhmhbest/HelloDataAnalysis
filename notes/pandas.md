@@ -121,6 +121,31 @@ print(ser1.iat[1])
 # 11
 ```
 
+### Operation
+
+```py
+ser2 = pd.Series(np.random.randint(0, 5, size=50))
+
+# 去除重复
+ser2.drop_duplicates(inplace=True)
+
+# 重新按值排序
+ser2.sort_values(inplace=True)
+
+# 按序重设索引
+ser2.reset_index(drop=True, inplace=True)
+
+print(ser2)
+'''
+0    0
+1    1
+2    2
+3    3
+4    4
+dtype: int32
+'''
+```
+
 ## DataFrame
 
 >[API DataFrame](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html)

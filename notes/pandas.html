@@ -274,6 +274,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#__init__">__init__</a></li>
 <li><a href="#attributes">Attributes</a></li>
 <li><a href="#select">Select</a></li>
+<li><a href="#operation">Operation</a></li>
 </ul>
 </li>
 <li><a href="#dataframe">DataFrame</a>
@@ -422,6 +423,28 @@ dtype: int32
 <span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>ser1<span class="token punctuation">.</span>iat<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token comment"># 11</span>
+</pre><h3 class="mume-header" id="operation">Operation</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python">ser2 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Series<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x53BB;&#x9664;&#x91CD;&#x590D;</span>
+ser2<span class="token punctuation">.</span>drop_duplicates<span class="token punctuation">(</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x91CD;&#x65B0;&#x6309;&#x503C;&#x6392;&#x5E8F;</span>
+ser2<span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x6309;&#x5E8F;&#x91CD;&#x8BBE;&#x7D22;&#x5F15;</span>
+ser2<span class="token punctuation">.</span>reset_index<span class="token punctuation">(</span>drop<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>ser2<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">&apos;&apos;&apos;
+0    0
+1    1
+2    2
+3    3
+4    4
+dtype: int32
+&apos;&apos;&apos;</span>
 </pre><h2 class="mume-header" id="dataframe">DataFrame</h2>
 
 <blockquote>
