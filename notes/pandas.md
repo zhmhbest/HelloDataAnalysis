@@ -298,8 +298,95 @@ print(df_test.iat[0, 0])
 
 ### Update
 
-```py
+**删除**
 
+```py
+# 创建视图
+df_test_row = df_test[:]
+
+# 删除行
+df_test_row = df_test_row.drop('a')
+print(df_test_row)
+'''
+    A   B   C   D   E   F   G   H   I   J
+b  10  11  12  13  14  15  16  17  18  19
+c  20  21  22  23  24  25  26  27  28  29
+d  30  31  32  33  34  35  36  37  38  39
+e  40  41  42  43  44  45  46  47  48  49
+'''
+
+# 创建视图
+df_test_col = df_test[:]
+
+# 删除列
+del df_test_col['A']
+
+# 弹出列
+col_B = df_test_col.pop('B')
+print(col_B)
+print(df_test_col)
+'''
+a     1
+b    11
+c    21
+d    31
+e    41
+Name: B, dtype: int32
+
+    C   D   E   F   G   H   I   J
+a   2   3   4   5   6   7   8   9
+b  12  13  14  15  16  17  18  19
+c  22  23  24  25  26  27  28  29
+d  32  33  34  35  36  37  38  39
+e  42  43  44  45  46  47  48  49
+'''
+```
+
+**追加行**
+
+```py
+df_test.loc['new_row1'] = range(90, 100)
+df_test.loc['new_row2'] = pd.Series({
+    'A': 0,
+    'E': 0
+})
+df_test = df_test.append(pd.DataFrame([
+    pd.Series([0, 1], name='new_row3', index=['G', 'D']),
+    pd.Series([0, 1], name='new_row4', index=['F', 'C']),
+]))
+print(df_test)
+'''
+             A     B     C     D     E     F     G     H     I     J
+a          0.0   1.0   2.0   3.0   4.0   5.0   6.0   7.0   8.0   9.0
+b         10.0  11.0  12.0  13.0  14.0  15.0  16.0  17.0  18.0  19.0
+c         20.0  21.0  22.0  23.0  24.0  25.0  26.0  27.0  28.0  29.0
+d         30.0  31.0  32.0  33.0  34.0  35.0  36.0  37.0  38.0  39.0
+e         40.0  41.0  42.0  43.0  44.0  45.0  46.0  47.0  48.0  49.0
+new_row1  90.0  91.0  92.0  93.0  94.0  95.0  96.0  97.0  98.0  99.0
+new_row2   0.0   NaN   NaN   NaN   0.0   NaN   NaN   NaN   NaN   NaN
+new_row3   NaN   NaN   NaN   1.0   NaN   NaN   0.0   NaN   NaN   NaN
+new_row4   NaN   NaN   1.0   NaN   NaN   0.0   NaN   NaN   NaN   NaN
+'''
+```
+
+**追加列**
+
+```py
+df_test['new_col1'] = range(90, 95)
+df_test['new_col2'] = pd.Series([0, 1], index=['a', 'b'])
+df_test = df_test.assign(
+    new_col3=pd.Series([0, 1], index=['b', 'c']),
+    new_col4=pd.Series([0, 1], index=['c', 'd'])
+)
+print(df_test)
+'''
+    A   B   C   D   E   F  ...   I   J  new_col1  new_col2  new_col3  new_col4
+a   0   1   2   3   4   5  ...   8   9        90       0.0       NaN       NaN
+b  10  11  12  13  14  15  ...  18  19        91       1.0       0.0       NaN
+c  20  21  22  23  24  25  ...  28  29        92       NaN       1.0       0.0
+d  30  31  32  33  34  35  ...  38  39        93       NaN       NaN       1.0
+e  40  41  42  43  44  45  ...  48  49        94       NaN       NaN       NaN
+'''
 ```
 
 ## IO
