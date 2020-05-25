@@ -314,15 +314,12 @@ e  40 NaN  42 NaN  44 NaN  46 NaN  48 NaN
 
 ### Update Shape
 
-**删除**
+**删除行**
 
 ```py
-# 创建视图
-df_test_row = df_test[:]
-
-# 删除行
-df_test_row = df_test_row.drop('a')
-print(df_test_row)
+df_row = df_test[:]
+df_row = df_row.drop('a')
+print(df_row)
 '''
     A   B   C   D   E   F   G   H   I   J
 b  10  11  12  13  14  15  16  17  18  19
@@ -330,17 +327,20 @@ c  20  21  22  23  24  25  26  27  28  29
 d  30  31  32  33  34  35  36  37  38  39
 e  40  41  42  43  44  45  46  47  48  49
 '''
+```
 
-# 创建视图
-df_test_col = df_test[:]
+**删除列**
 
-# 删除列
-del df_test_col['A']
+```py
+df_col = df_test[:]
 
-# 弹出列
-col_B = df_test_col.pop('B')
+# 删除一列
+del df_col['A']
+
+# 弹出一列
+col_B = df_col.pop('B')
 print(col_B)
-print(df_test_col)
+print(df_col)
 '''
 a     1
 b    11
@@ -361,23 +361,21 @@ e  42  43  44  45  46  47  48  49
 **追加行**
 
 ```py
-df_test.loc['new_row1'] = range(90, 100)
-df_test.loc['new_row2'] = pd.Series({
+df_ab = df_test[0:2].copy(True)
+df_ab.loc['new_row1'] = range(90, 100)
+df_ab.loc['new_row2'] = pd.Series({
     'A': 0,
     'E': 0
 })
-df_test = df_test.append(pd.DataFrame([
+df_ab = df_ab.append(pd.DataFrame([
     pd.Series([0, 1], name='new_row3', index=['G', 'D']),
     pd.Series([0, 1], name='new_row4', index=['F', 'C']),
 ]))
-print(df_test)
+print(df_ab)
 '''
              A     B     C     D     E     F     G     H     I     J
 a          0.0   1.0   2.0   3.0   4.0   5.0   6.0   7.0   8.0   9.0
 b         10.0  11.0  12.0  13.0  14.0  15.0  16.0  17.0  18.0  19.0
-c         20.0  21.0  22.0  23.0  24.0  25.0  26.0  27.0  28.0  29.0
-d         30.0  31.0  32.0  33.0  34.0  35.0  36.0  37.0  38.0  39.0
-e         40.0  41.0  42.0  43.0  44.0  45.0  46.0  47.0  48.0  49.0
 new_row1  90.0  91.0  92.0  93.0  94.0  95.0  96.0  97.0  98.0  99.0
 new_row2   0.0   NaN   NaN   NaN   0.0   NaN   NaN   NaN   NaN   NaN
 new_row3   NaN   NaN   NaN   1.0   NaN   NaN   0.0   NaN   NaN   NaN
@@ -388,20 +386,117 @@ new_row4   NaN   NaN   1.0   NaN   NaN   0.0   NaN   NaN   NaN   NaN
 **追加列**
 
 ```py
-df_test['new_col1'] = range(90, 95)
-df_test['new_col2'] = pd.Series([0, 1], index=['a', 'b'])
-df_test = df_test.assign(
+df_AB = df_test[['A', 'B']].copy(True)
+df_AB['new_col1'] = range(90, 95)
+df_AB['new_col2'] = pd.Series([0, 1], index=['a', 'b'])
+df_AB = df_AB.assign(
     new_col3=pd.Series([0, 1], index=['b', 'c']),
     new_col4=pd.Series([0, 1], index=['c', 'd'])
 )
-print(df_test)
+df_AB = df_AB.join(
+    pd.DataFrame(
+        {
+            'new_col5': [0, 1],
+            'new_col6': [2, 3]
+        },
+        index=['d', 'e']
+    )
+)
+print(df_AB)
 '''
-    A   B   C   D   E   F  ...   I   J  new_col1  new_col2  new_col3  new_col4
-a   0   1   2   3   4   5  ...   8   9        90       0.0       NaN       NaN
-b  10  11  12  13  14  15  ...  18  19        91       1.0       0.0       NaN
-c  20  21  22  23  24  25  ...  28  29        92       NaN       1.0       0.0
-d  30  31  32  33  34  35  ...  38  39        93       NaN       NaN       1.0
-e  40  41  42  43  44  45  ...  48  49        94       NaN       NaN       NaN
+    A   B  new_col1  new_col2  new_col3  new_col4  new_col5  new_col6
+a   0   1        90       0.0       NaN       NaN       NaN       NaN
+b  10  11        91       1.0       0.0       NaN       NaN       NaN
+c  20  21        92       NaN       1.0       0.0       NaN       NaN
+d  30  31        93       NaN       NaN       1.0       0.0       2.0
+e  40  41        94       NaN       NaN       NaN       1.0       3.0
+'''
+```
+
+**连接**
+
+```py
+df_cl = pd.DataFrame({
+    'Country': ['China', 'Japan', 'UK', 'Korea'],
+    'Language': ['Chines', 'Japanese', 'English', 'Korean']
+})
+df_cg = pd.DataFrame({
+    'Country': ['American', 'China', 'Japan', 'UK'],
+    'GDP': [99, 88, 77, 66]
+})
+df_nc = pd.DataFrame({
+    'Nation': ['American', 'China', 'Japan', 'UK', 'Korea'],
+    'Continent': ['North America', 'Asia', 'Asia', 'Europe', 'Asia']
+})
+'''
+  Country  Language
+0   China    Chines
+1   Japan  Japanese
+2      UK   English
+3   Korea    Korean
+
+    Country  GDP
+0  American   99
+1     China   88
+2     Japan   77
+3        UK   66
+
+     Nation      Continent
+0  American  North America
+1     China           Asia
+2     Japan           Asia
+3        UK         Europe
+4     Korea           Asia
+'''
+
+# 内连接: 忽略属性不完整的行
+print(df_cl.merge(df_cg, on='Country', how='inner'))
+'''
+  Country  Language  GDP
+0   China    Chines   88
+1   Japan  Japanese   77
+2      UK   English   66
+'''
+
+# 外连接: 保留所有行
+print(df_cl.merge(df_cg, on='Country', how='outer'))
+'''
+    Country  Language   GDP
+0     China    Chines  88.0
+1     Japan  Japanese  77.0
+2        UK   English  66.0
+3     Korea    Korean   NaN
+4  American       NaN  99.0
+'''
+
+# 左-外连接: 表1(df_cl)属性必须完整
+print(df_cl.merge(df_cg, on='Country', how='left'))
+'''
+  Country  Language   GDP
+0   China    Chines  88.0
+1   Japan  Japanese  77.0
+2      UK   English  66.0
+3   Korea    Korean   NaN
+'''
+
+# 右-外连接: 表2(df_cg)属性必须完整
+print(df_cl.merge(df_cg, on='Country', how='right'))
+'''
+    Country  Language  GDP
+0     China    Chines   88
+1     Japan  Japanese   77
+2        UK   English   66
+3  American       NaN   99
+'''
+
+# 分别指定聚合列
+print(df_cl.merge(df_nc, left_on='Country', right_on='Nation', how='inner'))
+'''
+  Country  Language Nation Continent
+0   China    Chines  China      Asia
+1   Japan  Japanese  Japan      Asia
+2      UK   English     UK    Europe
+3   Korea    Korean  Korea      Asia
 '''
 ```
 
@@ -444,9 +539,49 @@ dtype: int64
 '''
 ```
 
-### Join
+### To
 
+```py
+# 转换为Numpy类型
+print(df_test.to_numpy())
+'''
+[[ 0  1  2  3  4  5  6  7  8  9]
+ [10 11 12 13 14 15 16 17 18 19]
+ [20 21 22 23 24 25 26 27 28 29]
+ [30 31 32 33 34 35 36 37 38 39]
+ [40 41 42 43 44 45 46 47 48 49]]
+'''
 
+# 转换为字典类型
+print(df_test.to_dict())
+'''
+{
+    'A': {'a': 0, 'b': 10, 'c': 20, 'd': 30, 'e': 40}, 
+    'B': {'a': 1, 'b': 11, 'c': 21, 'd': 31, 'e': 41},
+    'C': {'a': 2, 'b': 12, 'c': 22, 'd': 32, 'e': 42},
+    'D': {'a': 3, 'b': 13, 'c': 23, 'd': 33, 'e': 43},
+    'E': {'a': 4, 'b': 14, 'c': 24, 'd': 34, 'e': 44},
+    'F': {'a': 5, 'b': 15, 'c': 25, 'd': 35, 'e': 45},
+    'G': {'a': 6, 'b': 16, 'c': 26, 'd': 36, 'e': 46},
+    'H': {'a': 7, 'b': 17, 'c': 27, 'd': 37, 'e': 47},
+    'I': {'a': 8, 'b': 18, 'c': 28, 'd': 38, 'e': 48},
+    'J': {'a': 9, 'b': 19, 'c': 29, 'd': 39, 'e': 49}
+}
+'''
+
+# 保存到本地
+df_test.to_pickle('./file_pickle.pkl', compression='bz2')
+
+# 保存到本地
+df_test.to_csv('./file_csv.csv')
+
+# 保存到本地
+df_test.to_json('./file_json.json')
+
+# 保存到本地
+# pip install openpyxl -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+df_test.to_excel('./file_excel.xlsx')
+```
 
 ## IO
 
@@ -493,27 +628,24 @@ dtype: int64
 
 >[API DatetimeIndex](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DatetimeIndex.html)
 
-<!-- ```py
-    # 生成时间序列
-    # start end : 时间起止
-    # periods : 生成个数
-    # freq : 生成频率
-    """
-    D : Day
-    B : BusinessDay
-    H : Hour
-    T/min : Minutes
-    S : Second
-    L/ms : Milli
-    U : Micro
-    M : MonthEnd
-    BM : BusinessMonthEnd
-    MS : MonthBegin
-    BMS : BusinessMonthBegin
-    """
-    print('时间序列')
-    df = pd.date_range("1996-10-16", "2019-10-25", periods=None, freq='Y')
-    print(len(df))
-    print(df[0])
-    print(df)
-``` -->
+```py
+"""
+    生成时间序列
+    start end     : 时间起止
+    start periods : 时间起始，生成个数
+    freq          : 生成频率
+        D     : Day
+        B     : BusinessDay
+        H     : Hour
+        T/min : Minutes
+        S     : Second
+        L/ms  : Milli
+        U     : Micro
+        M     : MonthEnd
+        BM    : BusinessMonthEnd
+        MS    : MonthBegin
+        BMS   : BusinessMonthBegin
+"""
+dti = pd.date_range(start='1996-10-16', periods=3, freq='Y')
+print(dti)
+```
