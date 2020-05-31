@@ -671,6 +671,49 @@ df_test.to_excel('./file_excel.xlsx')
         MS    : MonthBegin
         BMS   : BusinessMonthBegin
 """
+
 dti = pd.date_range(start='1996-10-16', periods=3, freq='Y')
+print(type(dti))
+# <class 'pandas.core.indexes.datetimes.DatetimeIndex'>
 print(dti)
+# DatetimeIndex(['1996-12-31', '1997-12-31', '1998-12-31'], dtype='datetime64[ns]', freq='A-DEC')
+```
+
+### Timestamp
+
+```py
+# 从字符串创建
+ts1 = pd.Timestamp('1996-10-16 10:12:23.000200')
+print(ts1, ts1.timestamp())
+# 1996-10-16 10:12:23.000200 845460743.0002
+
+# 指定详细时间
+ts2 = pd.Timestamp(year=1996, month=10, day=16, hour=10, minute=12, second=23, microsecond=200)
+print(ts2, ts2.timestamp())
+# 1996-10-16 10:12:23.000200 845460743.0002
+
+# 从时间戳创建
+ts3 = pd.Timestamp(845460743.0002, unit='s')
+print(ts3)
+# 1996-10-16 10:12:23.000200033
+```
+
+### Timedelta
+
+```py
+def get_td(sts1, sts2):
+    return pd.Timestamp(sts2) - pd.Timestamp(sts1)
+
+
+td1 = get_td('1996-10-16', '2020-6-1')
+print(type(td1))
+# <class 'pandas._libs.tslibs.timedeltas.Timedelta'>
+print(td1.days)
+# 8629
+
+td2 = get_td('12:22:31', '23:10:30')
+print(td2)
+# 0 days 10:47:59
+print(td2.total_seconds())
+# 38879.0
 ```

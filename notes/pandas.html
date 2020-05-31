@@ -292,7 +292,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#csv">CSV</a></li>
 </ul>
 </li>
-<li><a href="#datetimeindex">DatetimeIndex</a></li>
+<li><a href="#datetimeindex">DatetimeIndex</a>
+<ul>
+<li><a href="#timestamp">Timestamp</a></li>
+<li><a href="#timedelta">Timedelta</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -916,8 +921,45 @@ df_test<span class="token punctuation">.</span>to_excel<span class="token punctu
         MS    : MonthBegin
         BMS   : BusinessMonthBegin
 &quot;&quot;&quot;</span>
+
 dti <span class="token operator">=</span> pd<span class="token punctuation">.</span>date_range<span class="token punctuation">(</span>start<span class="token operator">=</span><span class="token string">&apos;1996-10-16&apos;</span><span class="token punctuation">,</span> periods<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> freq<span class="token operator">=</span><span class="token string">&apos;Y&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>dti<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># &lt;class &apos;pandas.core.indexes.datetimes.DatetimeIndex&apos;&gt;</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>dti<span class="token punctuation">)</span>
+<span class="token comment"># DatetimeIndex([&apos;1996-12-31&apos;, &apos;1997-12-31&apos;, &apos;1998-12-31&apos;], dtype=&apos;datetime64[ns]&apos;, freq=&apos;A-DEC&apos;)</span>
+</pre><h3 class="mume-header" id="timestamp">Timestamp</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x4ECE;&#x5B57;&#x7B26;&#x4E32;&#x521B;&#x5EFA;</span>
+ts1 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Timestamp<span class="token punctuation">(</span><span class="token string">&apos;1996-10-16 10:12:23.000200&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ts1<span class="token punctuation">,</span> ts1<span class="token punctuation">.</span>timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 1996-10-16 10:12:23.000200 845460743.0002</span>
+
+<span class="token comment"># &#x6307;&#x5B9A;&#x8BE6;&#x7EC6;&#x65F6;&#x95F4;</span>
+ts2 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Timestamp<span class="token punctuation">(</span>year<span class="token operator">=</span><span class="token number">1996</span><span class="token punctuation">,</span> month<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> day<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">,</span> hour<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> minute<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">,</span> second<span class="token operator">=</span><span class="token number">23</span><span class="token punctuation">,</span> microsecond<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ts2<span class="token punctuation">,</span> ts2<span class="token punctuation">.</span>timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 1996-10-16 10:12:23.000200 845460743.0002</span>
+
+<span class="token comment"># &#x4ECE;&#x65F6;&#x95F4;&#x6233;&#x521B;&#x5EFA;</span>
+ts3 <span class="token operator">=</span> pd<span class="token punctuation">.</span>Timestamp<span class="token punctuation">(</span><span class="token number">845460743.0002</span><span class="token punctuation">,</span> unit<span class="token operator">=</span><span class="token string">&apos;s&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ts3<span class="token punctuation">)</span>
+<span class="token comment"># 1996-10-16 10:12:23.000200033</span>
+</pre><h3 class="mume-header" id="timedelta">Timedelta</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">get_td</span><span class="token punctuation">(</span>sts1<span class="token punctuation">,</span> sts2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> pd<span class="token punctuation">.</span>Timestamp<span class="token punctuation">(</span>sts2<span class="token punctuation">)</span> <span class="token operator">-</span> pd<span class="token punctuation">.</span>Timestamp<span class="token punctuation">(</span>sts1<span class="token punctuation">)</span>
+
+
+td1 <span class="token operator">=</span> get_td<span class="token punctuation">(</span><span class="token string">&apos;1996-10-16&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;2020-6-1&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>td1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># &lt;class &apos;pandas._libs.tslibs.timedeltas.Timedelta&apos;&gt;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>td1<span class="token punctuation">.</span>days<span class="token punctuation">)</span>
+<span class="token comment"># 8629</span>
+
+td2 <span class="token operator">=</span> get_td<span class="token punctuation">(</span><span class="token string">&apos;12:22:31&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;23:10:30&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>td2<span class="token punctuation">)</span>
+<span class="token comment"># 0 days 10:47:59</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>td2<span class="token punctuation">.</span>total_seconds<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 38879.0</span>
 </pre>
       </div>
       
