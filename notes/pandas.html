@@ -868,9 +868,6 @@ df_test<span class="token punctuation">.</span>to_excel<span class="token punctu
 </blockquote>
 <h3 class="mume-header" id="csv">CSV</h3>
 
-<blockquote>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">API read_csv</a></p>
-</blockquote>
 <pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
     pd.read_csv(**)
         filepath_or_bufferstr: {str} &#x6587;&#x4EF6;&#x540D;
@@ -888,14 +885,11 @@ df_test<span class="token punctuation">.</span>to_excel<span class="token punctu
         parse_dates          : {list: col_names} &#x6307;&#x5B9A;&#x65E5;&#x671F;&#x5217;
         encoding             : {str} &#x5EFA;&#x8BAE;&apos;utf-8&apos;
 &quot;&quot;&quot;</span>
-</pre><blockquote>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html">API to_csv</a></p>
-</blockquote>
-<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+</pre><pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
     pd.DataFrame().to_csv(**)
         path_or_bufstr  : {str} &#x6587;&#x4EF6;&#x540D;
         sep             : {str} &#x5206;&#x9694;&#x7B26;
-        columns         : {list} &#x5199;&#x5165;&#x7684;&#x5217;
+        columns         : {list} &#x5199;&#x5165;&#x7684;&#x5217;&#xFF0C;&#x9ED8;&#x8BA4;&#x5168;&#x90E8;&#x5199;&#x5165;
         header          : {list} &#x91CD;&#x65B0;&#x6307;&#x5B9A;&#x5217;&#x540D;
         encoding        : {str} &#x5EFA;&#x8BAE;&apos;utf-8-sig&apos;
 &quot;&quot;&quot;</span>

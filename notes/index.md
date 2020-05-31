@@ -2,12 +2,14 @@
 
 # [数据分析](https://github.com/zhmhbest/HelloDataAnalysis)
 
-## 环境准备
+## Environment
 
 ```bash
 # Python3.6.8
 pip install numpy
+# pip install scipy
 pip install pandas
+pip install matplotlib
 ```
 
 ## [Numpy](./numpy.html)
@@ -39,3 +41,9 @@ pip install pandas
 ### [IO](pandas.html#io)
 
 ### [DatetimeIndex](pandas.html#datetimeindex)
+
+## [Matplotlib](./matplotlib.html)
+
+## SciPy
+
+>[SciPy Documentation](https://docs.scipy.org/doc/scipy/reference/)

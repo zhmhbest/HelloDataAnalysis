@@ -614,8 +614,6 @@ df_test.to_excel('./file_excel.xlsx')
 
 ### CSV
 
->[API read_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
-
 ```py
 """
     pd.read_csv(**)
@@ -636,14 +634,12 @@ df_test.to_excel('./file_excel.xlsx')
 """
 ```
 
->[API to_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
-
 ```py
 """
     pd.DataFrame().to_csv(**)
         path_or_bufstr  : {str} 文件名
         sep             : {str} 分隔符
-        columns         : {list} 写入的列
+        columns         : {list} 写入的列，默认全部写入
         header          : {list} 重新指定列名
         encoding        : {str} 建议'utf-8-sig'
 """
