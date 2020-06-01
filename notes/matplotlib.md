@@ -266,8 +266,9 @@ test_length = 5
 test_size = [300*(1+i) for i in range(test_length)]
 plt.scatter(
     range(test_length), [1 for i in range(test_length)],
-    s=test_size, marker='o',
-    c=['red', 'blue', 'green', 'gold', 'hotpink']
+    s=test_size,
+    c=['red', 'blue', 'green', 'gold', 'hotpink'], 
+    marker='o'
 )
 
 plt.yticks([])
