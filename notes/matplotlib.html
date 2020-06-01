@@ -266,13 +266,252 @@ pre[data-line] .line-highlight[data-end]:after {
 <h1 class="mume-header" id="matplotlibindexhtml"><a href="./index.html">Matplotlib</a></h1>
 
 <ul>
-<li><a href="#matplotlibindexhtml">Matplotlib</a></li>
+<li><a href="#matplotlibindexhtml">Matplotlib</a>
+<ul>
+<li><a href="#pyplot">PyPlot</a>
+<ul>
+<li><a href="#figure">Figure</a></li>
+<li><a href="#subplot">Subplot</a></li>
+<li><a href="#anatomy">Anatomy</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8A%98%E7%BA%BF%E5%9B%BE">&#x6298;&#x7EBF;&#x56FE;</a>
+<ul>
+<li><a href="#attribute">Attribute</a>
+<ul>
+<li><a href="#marker">Marker</a></li>
+<li><a href="#linestyle">Linestyle</a></li>
+<li><a href="#colorlinewidth">Color+LineWidth</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%A3%E7%82%B9%E5%9B%BE">&#x6563;&#x70B9;&#x56FE;</a></li>
+</ul>
+</li>
 </ul>
 <blockquote>
-<p><a href="https://matplotlib.org/gallery/index.html">Matplotlib Examples</a></p>
+<ul>
+<li><a href="https://matplotlib.org/api/index.html#modules">Matplotlib APIs</a></li>
+<li><a href="https://matplotlib.org/api/pyplot_summary.html#matplotlib-pyplot">Matplotlib pyplot</a></li>
+<li><a href="https://matplotlib.org/gallery/index.html">Matplotlib Examples</a></li>
+</ul>
 </blockquote>
-<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
-</pre>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+</pre><h2 class="mume-header" id="pyplot">PyPlot</h2>
+
+<h3 class="mume-header" id="figure">Figure</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># plt.figure()</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># plt.close()</span>
+</pre><p><img src="images/matplotlib_figure1.png" alt></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    &#x521B;&#x5EFA;&#x65B0;&#x56FE;&#x5F62;
+    def figure(
+        num=None,        # autoincrement if None, else integer from 1-N
+        figsize=None,    # {(float, float)} inches to (W, H), defaults (6.4, 4.8)
+        dpi=None,        # {int} defaults 100
+        facecolor=None,  # {str} the background color
+        edgecolor=None,  # {str} the border color
+        ...
+        clear=False      # {bool} If True and the figure already exists, then it is cleared.
+    )
+&quot;&quot;&quot;</span>
+<span class="token comment"># &#x521B;&#x5EFA;</span>
+fig1<span class="token punctuation">,</span> fig2 <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>facecolor<span class="token operator">=</span><span class="token string">&apos;pink&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>facecolor<span class="token operator">=</span><span class="token string">&apos;green&apos;</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">,</span> ax2 <span class="token operator">=</span> fig1<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fig2<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x7ED8;&#x5236;</span>
+ax1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ax2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x663E;&#x793A;</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span>figure<span class="token operator">=</span>fig1<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span>figure<span class="token operator">=</span>fig2<span class="token punctuation">)</span>
+
+<span class="token comment"># &#x5173;&#x95ED;</span>
+plt<span class="token punctuation">.</span>close<span class="token punctuation">(</span>fig1<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>close<span class="token punctuation">(</span>fig2<span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_figure2.png" alt></p>
+<h3 class="mume-header" id="subplot">Subplot</h3>
+
+<p><strong>&#x6570;&#x636E;</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python">x <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">0.0001</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">0.25</span><span class="token punctuation">)</span>
+</pre><p><strong>&#x65B9;&#x6CD5;1</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python">plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">221</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">223</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span>x<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p><strong>&#x65B9;&#x6CD5;2</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python">fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ax00 <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">221</span><span class="token punctuation">)</span>
+ax01 <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span>
+ax10 <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">223</span><span class="token punctuation">)</span>
+ax11 <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span>
+
+ax00<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+ax01<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+ax10<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+ax11<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span>x<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span>figure<span class="token operator">=</span>fig<span class="token punctuation">)</span>
+</pre><p><strong>&#x65B9;&#x6CD5;3</strong></p>
+<pre data-role="codeBlock" data-info="py" class="language-python">fig<span class="token punctuation">,</span> axs <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplots<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+axs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+axs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+axs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>plot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+axs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span>x<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span>figure<span class="token operator">=</span>fig<span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_subplot1.png" alt></p>
+<h3 class="mume-header" id="anatomy">Anatomy</h3>
+
+<p><img src="images/matplotlib_anatomy.png" alt></p>
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x6570;&#x636E;&#x51C6;&#x5907;</span>
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x56FE;&#x50CF;&#x548C;&#x5B50;&#x56FE;</span>
+<span class="token comment"># fig, ax = plt.subplots()</span>
+fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>facecolor<span class="token operator">=</span><span class="token string">&apos;#CCCCCC&apos;</span><span class="token punctuation">)</span>
+ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x7ED8;&#x5236;&#x4E09;&#x6761;&#x66F2;&#x7EBF;</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">&quot;Linear&quot;</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">&quot;Quadratic&quot;</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token operator">**</span><span class="token number">3</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">&quot;Cubic&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x8F74;&#x540D;&#x79F0;</span>
+<span class="token comment"># plt.xlabel(&quot;X Label&quot;)</span>
+<span class="token comment"># plt.ylabel(&quot;Y Label&quot;)</span>
+ax<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">&quot;X Label&quot;</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">&quot;Y Label&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x8F74;&#x523B;&#x5EA6;</span>
+ax<span class="token punctuation">.</span>set_xticks<span class="token punctuation">(</span><span class="token punctuation">[</span>i<span class="token operator">/</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_yticks<span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x66FF;&#x6362;&#x8F74;&#x523B;&#x5EA6;&#x540D;&#x79F0;</span>
+<span class="token comment"># ax.set_xticks(...)</span>
+ax<span class="token punctuation">.</span>set_yticklabels<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token number">65</span><span class="token operator">+</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x8F74;&#x8303;&#x56F4;</span>
+ax<span class="token punctuation">.</span>set_xlim<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">)</span>
+<span class="token comment"># ax.set_ylim(..., ...)</span>
+
+<span class="token comment"># &#x6DFB;&#x52A0;&#x6807;&#x9898;&#x3001;&#x56FE;&#x4F8B;&#x3001;&#x7F51;&#x683C;</span>
+<span class="token comment"># plt.title(&quot;Figure Name&quot;)</span>
+ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">&quot;Figure Name&quot;</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x663E;&#x793A;&#x56FE;&#x50CF;</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span>figure<span class="token operator">=</span>fig<span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_anatomy_demo.png" alt></p>
+<h2 class="mume-header" id="%E6%8A%98%E7%BA%BF%E5%9B%BE">&#x6298;&#x7EBF;&#x56FE;</h2>
+
+<h3 class="mume-header" id="attribute">Attribute</h3>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">def</span> <span class="token function">get_add_plotter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">adder</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">nonlocal</span> index
+        index <span class="token operator">+=</span> <span class="token number">0.2</span>
+        plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span>index<span class="token punctuation">,</span> index<span class="token punctuation">,</span> <span class="token number">1.3</span><span class="token operator">*</span>index<span class="token punctuation">,</span> index<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">**</span>params<span class="token punctuation">)</span>
+    index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">return</span> adder
+
+
+add_plotter <span class="token operator">=</span> get_add_plotter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dpi<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">)</span>
+<span class="token comment"># &#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;</span>
+
+<span class="token comment"># Test code here.</span>
+
+<span class="token comment"># &#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;</span>
+plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">3.6</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="marker">Marker</h4>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">for</span> ch <span class="token keyword">in</span> <span class="token punctuation">[</span>
+    <span class="token string">&apos;,&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;^&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;v&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;&lt;&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;&gt;&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;|&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;+&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;P&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;*&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;x&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;X&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;.&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;o&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;h&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;H&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;8&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;p&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;s&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;d&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;D&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;1&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;2&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;3&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;4&apos;</span>
+<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    add_plotter<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">&apos;label&apos;</span><span class="token punctuation">:</span> ch<span class="token punctuation">,</span>
+        <span class="token string">&apos;marker&apos;</span><span class="token punctuation">:</span> ch
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_plot_marker.png" alt></p>
+<h4 class="mume-header" id="linestyle">Linestyle</h4>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">for</span> ch <span class="token keyword">in</span> <span class="token punctuation">[</span>
+    <span class="token string">&apos;-&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;--&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;-.&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;:&apos;</span>
+<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    add_plotter<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string">&apos;label&apos;</span><span class="token punctuation">:</span> ch<span class="token punctuation">,</span>
+        <span class="token string">&apos;linestyle&apos;</span><span class="token punctuation">:</span> ch
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_plot_linestyle.png" alt></p>
+<h4 class="mume-header" id="colorlinewidth">Color+LineWidth</h4>
+
+<pre data-role="codeBlock" data-info="py" class="language-python">add_plotter<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">&apos;color&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;blue&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;linewidth&apos;</span><span class="token punctuation">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+add_plotter<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">&apos;color&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;linewidth&apos;</span><span class="token punctuation">:</span> <span class="token number">4</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+add_plotter<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">&apos;color&apos;</span><span class="token punctuation">:</span> <span class="token string">&apos;green&apos;</span><span class="token punctuation">,</span>
+    <span class="token string">&apos;linewidth&apos;</span><span class="token punctuation">:</span> <span class="token number">6</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_plot_color_width.png" alt></p>
+<h2 class="mume-header" id="%E6%95%A3%E7%82%B9%E5%9B%BE">&#x6563;&#x70B9;&#x56FE;</h2>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    x, y: &#x5750;&#x6807;
+    s: {int|sequence} &#x5927;&#x5C0F;
+    c: {str|sequence} &#x989C;&#x8272;
+    marker:
+    ...
+&quot;&quot;&quot;</span>
+test_length <span class="token operator">=</span> <span class="token number">5</span>
+test_size <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">300</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>test_length<span class="token punctuation">)</span><span class="token punctuation">]</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>
+    <span class="token builtin">range</span><span class="token punctuation">(</span>test_length<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>test_length<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    s<span class="token operator">=</span>test_size<span class="token punctuation">,</span> marker<span class="token operator">=</span><span class="token string">&apos;o&apos;</span><span class="token punctuation">,</span>
+    c<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&apos;red&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;blue&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;green&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;gold&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;hotpink&apos;</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p><img src="images/matplotlib_scatter.png" alt></p>
+
       </div>
       
       
