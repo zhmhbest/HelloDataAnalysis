@@ -47,3 +47,5 @@ pip install matplotlib
 ## SciPy
 
 >[SciPy Documentation](https://docs.scipy.org/doc/scipy/reference/)
+
+## [Hadoop](./hadoop.html)
