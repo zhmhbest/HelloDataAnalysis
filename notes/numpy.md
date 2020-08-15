@@ -273,12 +273,12 @@ print(nd_random_uniform1)
 
 ## reshape
 
-**形状调整**
+### 序列升维
 
 ```py
+# 测试数据
 nd_arr = np.arange(24)
-print(nd_arr)
-print()
+print(nd_arr, end='\n\n')
 '''
     [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 '''
@@ -286,6 +286,8 @@ print()
 print(nd_arr.reshape((1, 24)))
 print(nd_arr.reshape((1, -1)))
 print(nd_arr.reshape((-1, 24)))
+print(nd_arr[None, :])
+print(nd_arr[np.newaxis, :])
 print()
 '''
     [[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]]
@@ -303,6 +305,8 @@ print()
 print(nd_arr.reshape((24, 1)))
 print(nd_arr.reshape((24, -1)))
 print(nd_arr.reshape((-1, 1)))
+print(nd_arr[:, np.newaxis])
+print(nd_arr[:, None])
 '''
 [[ 0]
  [ 1]
@@ -312,24 +316,24 @@ print(nd_arr.reshape((-1, 1)))
 '''
 ```
 
+### 序列降维
+
 ```py
-nd_arr = np.array([
-    [1, 2],
-    [3, 4]
-])
-print(nd_arr)
-print()
+# 测试数据
+nd_arr = np.arange(24).reshape((3, -1))
+print(nd_arr, end='\n\n')
 '''
-[[1 2]
- [3 4]]
+[[ 0  1  2  3  4  5  6  7]
+ [ 8  9 10 11 12 13 14 15]
+ [16 17 18 19 20 21 22 23]]
 '''
 
-print(nd_arr.reshape(4))
+print(nd_arr.reshape(24))
 print(nd_arr.reshape(-1))
-print(nd_arr.reshape([4]))
-print(nd_arr.reshape((4,)))
+print(nd_arr.reshape([24]))
+print(nd_arr.reshape((24,)))
 '''
-[1 2 3 4]
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 '''
 ```
 
