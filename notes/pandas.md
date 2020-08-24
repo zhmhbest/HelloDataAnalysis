@@ -694,6 +694,24 @@ print(ts3)
 # 1996-10-16 10:12:23.000200033
 ```
 
+```py
+import time
+import datetime
+import pandas as pd
+
+dt = datetime.datetime.now()
+print(dt)
+
+ts1 = pd.Timestamp(dt).timestamp()
+print("默认时区", ts1)
+
+ts2 = pd.Timestamp(dt, tz='Asia/Shanghai').timestamp()
+print("上海时区", ts2)
+
+ts3 = int(time.mktime(dt.timetuple()))
+print("默认时区", ts3)
+```
+
 ### Timedelta
 
 ```py
