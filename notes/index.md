@@ -2,16 +2,6 @@
 
 # [数据分析](https://github.com/zhmhbest/HelloDataAnalysis)
 
-## Environment
-
-```bash
-# Python3.6.8
-pip install numpy
-# pip install scipy
-pip install pandas
-pip install matplotlib
-```
-
 ## [Numpy](./numpy.html)
 
 ### [types](numpy.html#types)
@@ -47,5 +37,13 @@ pip install matplotlib
 ## SciPy
 
 >[SciPy Documentation](https://docs.scipy.org/doc/scipy/reference/)
+
+科学计算框架
+
+## SimPy
+
+>[SimPy Documentation](https://simpy.readthedocs.io/en/latest/)
+
+仿真框架
 
 ## [Hadoop](./hadoop.html)
