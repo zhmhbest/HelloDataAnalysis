@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://zhmhbest.gitee.io/hellomathematics/style/index.css">
 <script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 
-# [Pandas](./index.html)
+# [Pandas](../index.html)
 
 [TOC]
 
@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 ```
 
-## Types
+## 数据类型
 
 | Python | Pandas | Numpy |
 | - | - | - |

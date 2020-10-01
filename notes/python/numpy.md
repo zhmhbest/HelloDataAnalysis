@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://zhmhbest.gitee.io/hellomathematics/style/index.css">
 <script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 
-# [Numpy](./index.html)
+# [Numpy](../index.html)
 
 [TOC]
 
@@ -9,7 +9,7 @@
 import numpy as np
 ```
 
-## types
+## 数据类型
 
 ```py
 numpy_types = [
@@ -49,7 +49,7 @@ print(np.nan == np.nan)
 print(np.isnan(np.nan))
 ```
 
-## ndarray
+## 生成数据
 
 ### 固定数组
 
@@ -271,7 +271,7 @@ print(nd_random_uniform1)
 # 👆 实际运行结果不一定与此处一致
 ```
 
-## reshape
+## 调整维度
 
 ### 序列升维
 
@@ -337,9 +337,7 @@ print(nd_arr.reshape((24,)))
 '''
 ```
 
-## astype
-
-**类型转换**
+## 类型转换
 
 ```py
 nd_arr = np.array(1, dtype=np.int32)
@@ -355,9 +353,7 @@ print(nd_arr_i8.dtype)
 # int8
 ```
 
-## stack
-
-**数据拼接**
+## 数据拼接
 
 ```py
 arr1 = np.arange(0, 10).reshape(2, -1)
@@ -390,7 +386,7 @@ print(np.hstack((arr1, arr2)))
 '''
 ```
 
-## section
+## 切片
 
 **数据准备**
 
@@ -496,7 +492,7 @@ print(nd_arr[:, [0, 2, 4]])     # col = 0, 2, 4
 '''
 ```
 
-## loadtxt
+## 读取数据
 
 ```py
 def sequence_generator(row_num, delimiter=','):
@@ -556,7 +552,7 @@ print(np.loadtxt(sequence_generator(5), usecols=(2, 3), dtype=np.int, delimiter=
 '''
 ```
 
-## analysis
+## 数据分析
 
 >- `axis=0`：按列统计，结果为行
 >- `axis=1`：按行统计，结果为列

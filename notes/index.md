@@ -2,48 +2,22 @@
 
 # [数据分析](https://github.com/zhmhbest/HelloDataAnalysis)
 
-## [Numpy](./numpy.html)
+## [SQL](https://zhmhbest.github.io/HelloSQLDB/notes/index.html)
 
-### [types](numpy.html#types)
+## Python
 
-### [ndarray](numpy.html#ndarray)
+### [Numpy](python/numpy.html)
 
-### [reshape](numpy.html#reshape)
+### [Pandas](python/pandas.html)
 
-### [astype](numpy.html#astype)
+### [Matplotlib](python/matplotlib.html)
 
-### [stack](numpy.html#stack)
+### SciPy
 
-### [section](numpy.html#section)
+科学计算框架，参见[SciPy Documentation](https://docs.scipy.org/doc/scipy/reference/)
 
-### [loadtxt](numpy.html#loadtxt)
+### SimPy
 
-### [analysis](numpy.html#analysis)
+仿真框架，参见[SimPy Documentation](https://simpy.readthedocs.io/en/latest/)
 
-## [Pandas](./pandas.html)
-
-### [Types](pandas.html#types)
-
-### [Series](pandas.html#series)
-
-### [DataFrame](pandas.html#dataframe)
-
-### [IO](pandas.html#io)
-
-### [DatetimeIndex](pandas.html#datetimeindex)
-
-## [Matplotlib](./matplotlib.html)
-
-## SciPy
-
->[SciPy Documentation](https://docs.scipy.org/doc/scipy/reference/)
-
-科学计算框架
-
-## SimPy
-
->[SimPy Documentation](https://simpy.readthedocs.io/en/latest/)
-
-仿真框架
-
-## [Hadoop](./hadoop.html)
+## [Hadoop](hadoop.html)
