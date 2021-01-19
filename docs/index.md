@@ -2,8 +2,6 @@
 
 # [数据分析](https://github.com/zhmhbest/HelloDataAnalysis)
 
-## [SQL](https://zhmhbest.github.io/HelloSQLDB/notes/index.html)
-
 ## Python
 
 ### [Numpy](python/numpy.html)
@@ -20,6 +18,6 @@
 
 仿真框架，参见[SimPy Documentation](https://simpy.readthedocs.io/en/latest/)
 
-## [Hadoop](hadoop/index.html)
+## Java
 
-## [Spark](spark/index.html)
+### [Spark](spark/index.html)

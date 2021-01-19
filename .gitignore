@@ -1,5 +1,3 @@
-dump/
-.idea
-.vscode
-**dump
-**test.py
+.trash/
+/.idea/
+/.vscode/
