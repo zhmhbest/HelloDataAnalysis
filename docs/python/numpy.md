@@ -5,6 +5,8 @@
 
 [TOC]
 
+>[References](https://numpy.org/doc/1.14/reference/index.html)
+
 ## Datatype
 
 @import "numpy/demo_datatype.py"
@@ -30,6 +32,8 @@
 @import "numpy/demo_loadtext.py"
 
 ## Statistic
+
+>[Statistic](https://numpy.org/doc/1.14/reference/routines.statistics.html)
 
 ### Preprocessing
 

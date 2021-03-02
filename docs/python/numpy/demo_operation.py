@@ -73,6 +73,56 @@ if __name__ == '__main__':
 
     """
         ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+        Squeeze: 从ndarray中删除一维项
+    """
+    squeeze_arr1 = np.arange(6).reshape((2, 1, 3))
+    print(squeeze_arr1)
+    '''
+    [[[0 1 2]]
+     [[3 4 5]]]
+    '''
+    print(np.squeeze(squeeze_arr1))
+    '''
+    [[0 1 2]
+     [3 4 5]]
+    '''
+
+    squeeze_arr2 = np.arange(6).reshape((1, 2, 3))
+    print(squeeze_arr2)
+    '''
+    [[[0 1 2]
+      [3 4 5]]]
+    '''
+    print(np.squeeze(squeeze_arr2))
+    '''
+    [[0 1 2]
+     [3 4 5]]
+    '''
+
+    """
+        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+        Unsqueeze / expand_dims: 在ndarray中增加一维
+    """
+    expand_arr = np.arange(3)
+    print(expand_arr)
+    '''
+    [0 1 2]
+    '''
+
+    print(np.expand_dims(expand_arr, 0))
+    '''
+    [[0 1 2]]
+    '''
+
+    print(np.expand_dims(expand_arr, 1))
+    '''
+    [[0]
+     [1]
+     [2]]
+    '''
+
+    """
+        ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
         Stack拼接
     """
     stack_arr1 = np.arange(0, 6).reshape(2, -1)
