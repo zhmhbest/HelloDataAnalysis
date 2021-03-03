@@ -175,7 +175,7 @@ if __name__ == '__main__':
         [[5, 6],
          [7, 8]],
     ])
-    print("123")
+
     print(np.swapaxes(transpose_arr2, -1, -2))
     print(np.swapaxes(transpose_arr2, -2, -1))
     '''
