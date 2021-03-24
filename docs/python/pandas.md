@@ -324,8 +324,9 @@ print(df_test.iat[0, 0])
 **筛选**
 
 ```py
-# 筛选数据，未选到的就是NaN
+# 筛选数据，未选到的行直接删除
 print(df_test[0 == df_test % 2])
+# 筛选数据，未选到的就是NaN
 print(df_test.where(0 == df_test % 2, other=np.nan, inplace=False))
 '''
     A   B   C   D   E   F   G   H   I   J
@@ -581,7 +582,7 @@ print(df_test.to_numpy())
 print(df_test.to_dict())
 '''
 {
-    'A': {'a': 0, 'b': 10, 'c': 20, 'd': 30, 'e': 40}, 
+    'A': {'a': 0, 'b': 10, 'c': 20, 'd': 30, 'e': 40},
     'B': {'a': 1, 'b': 11, 'c': 21, 'd': 31, 'e': 41},
     'C': {'a': 2, 'b': 12, 'c': 22, 'd': 32, 'e': 42},
     'D': {'a': 3, 'b': 13, 'c': 23, 'd': 33, 'e': 43},
@@ -639,6 +640,7 @@ df_test.to_excel('./file_excel.xlsx')
     pd.DataFrame().to_csv(**)
         path_or_bufstr  : {str} 文件名
         sep             : {str} 分隔符
+        index           : {bool} 是否写入索引
         columns         : {list} 写入的列，默认全部写入
         header          : {list} 重新指定列名
         encoding        : {str} 建议'utf-8-sig'
