@@ -3,12 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"],"messageStyle":"none","tex2jax":{"processEnvironments":false,"processEscapes":true,"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"TeX":{"extensions":["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]},"HTML-CSS":{"availableFonts":["TeX"]}});
-        </script>
-        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
-        
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css">
       
       
       
@@ -612,6 +607,9 @@ Name: a, dtype: int32
 </pre><p><strong>&#x7B5B;&#x9009;</strong></p>
 <pre data-role="codeBlock" data-info="py" class="language-python"><span class="token comment"># &#x7B5B;&#x9009;&#x6570;&#x636E;&#xFF0C;&#x672A;&#x9009;&#x5230;&#x7684;&#x884C;&#x76F4;&#x63A5;&#x5220;&#x9664;</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">[</span><span class="token number">0</span> <span class="token operator">==</span> df_test <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">[</span><span class="token punctuation">(</span>df_test <span class="token operator">&gt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>df_test <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">[</span><span class="token punctuation">(</span>df_test <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>df_test <span class="token operator">&gt;</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
 <span class="token comment"># &#x7B5B;&#x9009;&#x6570;&#x636E;&#xFF0C;&#x672A;&#x9009;&#x5230;&#x7684;&#x5C31;&#x662F;NaN</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>df_test<span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> df_test <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">,</span> other<span class="token operator">=</span>np<span class="token punctuation">.</span>nan<span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token triple-quoted-string string">&apos;&apos;&apos;
