@@ -325,9 +325,10 @@ print(df_test.iat[0, 0])
 
 ```py
 # 筛选数据，未选到的行直接删除
-print(df_test[0 == df_test % 2])
-print(df_test[(df_test > 2) & (df_test < 5)])
-print(df_test[(df_test < 2) | (df_test > 5)])
+print(df_test[(df_test['A'] >= 20) & (df_test['A'] <= 30)])
+print(df_test[(df_test['A'] < 20) | (df_test['A'] > 30)])
+print(df_test.query('(A >= 20) & (A <= 30)'))
+print(df_test.query('(A < 20) | (A > 30)'))
 
 # 筛选数据，未选到的就是NaN
 print(df_test.where(0 == df_test % 2, other=np.nan, inplace=False))
