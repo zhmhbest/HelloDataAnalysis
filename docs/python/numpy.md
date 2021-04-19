@@ -27,6 +27,10 @@
 
 @import "numpy/demo_slice.py"
 
+## Norm
+
+@import "numpy/demo_norm.py"
+
 ## LoadText
 
 @import "numpy/demo_loadtext.py"

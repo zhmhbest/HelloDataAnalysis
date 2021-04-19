@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
       
       
       
@@ -276,6 +276,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li><a href="#operation">Operation</a></li>
 <li><a href="#slice">Slice</a></li>
+<li><a href="#norm">Norm</a></li>
 <li><a href="#loadtext">LoadText</a></li>
 <li><a href="#statistic">Statistic</a>
 <ul>
@@ -860,6 +861,25 @@ pre[data-line] .line-highlight[data-end]:after {
      ...
      [50 52 54]]
     &apos;&apos;&apos;</span>
+
+</pre><h2 class="mume-header" id="norm">Norm</h2>
+
+<pre data-role="codeBlock" data-info="py" class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+arr <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+
+<span class="token comment"># &#x7EDD;&#x5BF9;&#x503C;&#x4E4B;&#x548C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;1-&#x8303;&#x6570;&#xFF1A;&quot;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token builtin">ord</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x5E73;&#x65B9;&#x548C;&#x5F00;&#x6839;&#x53F7;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;2-&#x8303;&#x6570;&#xFF1A;&quot;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token builtin">ord</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x4E09;&#x6B21;&#x65B9;&#x548C;&#x5F00;&#x4E09;&#x6B21;&#x6839;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;3-&#x8303;&#x6570;&#xFF1A;&quot;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token builtin">ord</span><span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># &#x7EDD;&#x5BF9;&#x503C;&#x7684;&#x6700;&#x5927;&#x503C;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;&#x221E;-&#x8303;&#x6570;&#xFF1A;&quot;</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token builtin">ord</span><span class="token operator">=</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 </pre><h2 class="mume-header" id="loadtext">LoadText</h2>
 
